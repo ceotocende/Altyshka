@@ -9,6 +9,7 @@ interface UserAttributes {
     second_currency: number;
     exp: number;
     rank: number;
+    voice: number;
 }
 
 interface UsersCreateAt extends Optional<UserAttributes, 'user_id'> { };
@@ -19,6 +20,7 @@ export class Users extends Model<UserAttributes, UsersCreateAt> implements UserA
     public second_currency!: number;
     public exp!: number;
     public rank!: number;
+    public voice!: number;
 
     public async findOneUser(user_id: string): Promise<Users | null> {
         return Users.findOne({
@@ -52,6 +54,12 @@ Users.init({
     },
     rank: {
         type: INTEGER,
+        primaryKey: false,
+        defaultValue: 0,
+        allowNull: false
+    },
+    voice: {
+        type: BIGINT,
         primaryKey: false,
         defaultValue: 0,
         allowNull: false

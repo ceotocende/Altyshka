@@ -22,7 +22,8 @@ export async function AddBalance(User: User, FirstBalance: number, SecondBalance
                 exp: 1,
                 first_currency: FirstBalance,
                 second_currency: SecondBalance || 1,
-                rank: 1
+                rank: 1,
+                voice: 0
             });
         } else if (UserId === UserDb.user_id) {
             UserDb.first_currency = Number(UserDb.first_currency) + FirstBalance;

@@ -5,7 +5,6 @@ import { AddMessage } from "../../database/Functions/Message/AddMessage";
 client.on('messageCreate', message => {
     if (message.guildId !== `${process.env.GUILD_ID}`) return;
     if (!message.inGuild()) return;
-    console.log(message)
     if (message.author.bot) return;
     try {
         AddMessage(message.author, message.content)
