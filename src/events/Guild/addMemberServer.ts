@@ -1,11 +1,11 @@
-import { EmbedBuilder } from "discord.js";
+import { EmbedBuilder, TextChannel } from "discord.js";
 import { client } from "../..";
 
 client.on('guildMemberAdd', async member => {
     if (member.user.bot) return;
 
     const embed = new EmbedBuilder()
-        .setAuthor({ name: 'RU ENDO', iconURL: `${member.avatar}` })
+        .setAuthor({ name: 'RU ENDO', iconURL: `${member.user.avatarURL()}` })
         .setThumbnail("https://images-ext-1.discordapp.net/external/rKLuZsITKWZfl1UVEChdTMP_hKsyRWxbw4Fb_I3DzOY/%3Fsqp%3D-oaymwEmCIAKENAF8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGEgZShOMA8%3D%26rs%3DAOn4CLB5l_e3ISA8aBmzQnD5_Tr_ty7Irg/https/i.ytimg.com/vi/NV-AU-qyGKo/maxresdefault.jpg?format=webp&width=967&height=544")
         .setFields(
             {
@@ -19,4 +19,16 @@ client.on('guildMemberAdd', async member => {
         )
         .setColor("Red")
         .setTimestamp()
+
+    const text = `${member.user} Добро пожаловать на сервер`
+
+    if (member.guild.id === "1429576059606663241") {
+        const channelSayHi = await member.guild.channels.cache.get("1429589421778276392") as TextChannel;
+
+        channelSayHi.send({
+            content: text,
+            embeds: [embed]
+        })
+
+    }
 })
