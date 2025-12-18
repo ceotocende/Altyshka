@@ -40,7 +40,6 @@ export default new client.command({
         const rowMenu = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(selectMenu)
         
         if (!targetUser || targetUser.id === interaction.user.id) {
-            console.log('sadasd')
             msg = await interaction.reply({
                 embeds: [embed],
                 components: [rowMenu]
@@ -76,7 +75,7 @@ export default new client.command({
                             msg!.edit({
                                 embeds: [
                                     new EmbedBuilder()
-                                        .setAuthor({ name: `Отношения участника: ${targetUser.username}` })
+                                        .setAuthor({ name: `Активности участника: ${targetUser.username}` })
                                         .setFields(
                                             {
                                                 name: `Общее время в голсовых каналх`,
@@ -94,7 +93,7 @@ export default new client.command({
                                         .setColor(`#${colors.stable}`)
                                         .setThumbnail(targetUser.avatarURL())
                                 ],
-                                components: [rowMenu]
+                                components: [ ]
                             })
                             break;
                         default:
