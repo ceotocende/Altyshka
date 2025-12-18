@@ -103,11 +103,5 @@ export default new client.command({
                 }
             }
         })
-
-        collector.on('end', async () => {
-            await msg!.edit({
-                components: []
-            })
-        })
     },
 })
