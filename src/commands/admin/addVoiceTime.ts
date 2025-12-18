@@ -8,7 +8,7 @@ import formatTimeForProfile from "../../utils/formatTimeForProfile";
 
 export default new client.command({
     structure: new SlashCommandBuilder()
-        .setName('addVoiceUserTime')
+        .setName('add_voice_user_time')
         .setDescription('настройки админа, не лезь если не знаешь')
         .addUserOption(op => op
             .setName('user')
