@@ -5,7 +5,7 @@ client.on('guildMemberAdd', async member => {
     if (member.user.bot) return;
 
     const embed = new EmbedBuilder()
-        .setAuthor({ name: 'RU ENDO', iconURL: `${member.user.avatarURL()}` })
+        .setAuthor({ name: 'RU ENDO', iconURL: `${member.user.avatarURL() || 'https://images-ext-1.discordapp.net/external/XB52oJ4yX0BXp1Sdurg1ZLSAAsRQVFBb5dRtILBwyYc/https/cdn.discordapp.com/icons/1429576059606663241/a_992caaae7744068d87030583d72fe16b.gif'}` })
         .setThumbnail("https://images-ext-1.discordapp.net/external/rKLuZsITKWZfl1UVEChdTMP_hKsyRWxbw4Fb_I3DzOY/%3Fsqp%3D-oaymwEmCIAKENAF8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGEgZShOMA8%3D%26rs%3DAOn4CLB5l_e3ISA8aBmzQnD5_Tr_ty7Irg/https/i.ytimg.com/vi/NV-AU-qyGKo/maxresdefault.jpg?format=webp&width=967&height=544")
         .setFields(
             {
