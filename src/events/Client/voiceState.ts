@@ -80,7 +80,7 @@ async function saveTimeOnRestart() {
 
 // Основной обработчик голосовых событий
 client.on('voiceStateUpdate', async (oldState, newState) => {
-    const channelLog = newState.guild.channels.cache.get(channelsId.chatLog) as TextChannel;
+    const channelLog = newState.guild.channels.cache.get(channelsId.voiceLog) as TextChannel;
     
     try {
         if ((oldState.guild.id !== channelsId.guildId) || (newState.guild.id !== channelsId.guildId)) return;
