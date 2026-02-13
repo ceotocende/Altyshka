@@ -23,7 +23,7 @@ client.on('guildMemberAdd', async member => {
     const text = `${member.user} Добро пожаловать на сервер`
 
     if (member.guild.id === "1429576059606663241") {
-        const channelSayHi = await member.guild.channels.cache.get("1429589421778276392") as TextChannel;
+        const channelSayHi = await member.guild.channels.cache.get("1459664592681701478") as TextChannel;
 
         channelSayHi.send({
             content: text,
