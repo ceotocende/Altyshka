@@ -67,7 +67,7 @@ client.on('messageCreate', async message => {
                 return;
             } else {
                 channel.setName(`${`[ФУЛЛ] ` + channel.name}`)
-                await channel.setLocked(true)
+                // await channel.setLocked(true)
             }
         }
     }
