@@ -52,10 +52,12 @@ client.on('messageCreate', async message => {
             if (isOwner) {
                 channel.setName(`${`[ЗАКРЫТО] ` + channel.name}`)
                 await channel.setLocked(true)
+                map.delete(message.author.id)
             } 
             if (isModerator === channel.id) {
                 channel.setName(`${`[ЗАКРЫТО] ` + channel.name}`)
                 await channel.setLocked(true)
+                map.delete(message.author.id)
             }
         }
     }
