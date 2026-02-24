@@ -2,6 +2,8 @@ import { EmbedBuilder, Guild, Message } from "discord.js";
 import { client } from "../..";
 import { channelsId } from "../../utils/config";
 
+const map = new Map();
+
 client.on('messageCreate', async message => {
     if (message.guildId !== `${process.env.GUILD_ID}`) return;
     if (!message.inGuild()) return;
@@ -18,6 +20,7 @@ client.on('messageCreate', async message => {
                     name: `${await replaceRoleMentionsWithNames(message.guild, message.content)}`,
                     autoArchiveDuration: 60,
                 });
+                
                 thread.send({
                     content: `${message.author}`,
                     embeds: [
@@ -28,6 +31,8 @@ client.on('messageCreate', async message => {
                             .setColor('Random')
                     ]
                 })
+
+                map.set(message.author.id, thread.id);
             } catch (err) {
                 console.log('Ошибка по сообщениям' + err)
             }
@@ -41,15 +46,16 @@ client.on('messageCreate', async message => {
         const channel = message.channel;
 
         if (channel.isThread()) {
-            const threadOwnerId = channel.ownerId;
-            const isOwner = message.author.id === threadOwnerId;
-            const isModerator = message.member?.permissions.has('ManageThreads');
-
-            if (!isOwner && !isModerator) {
-                return;
-            } else {
+            const isOwner = message.member?.permissions.has('ManageThreads');
+            const isModerator = map.get(message.author.id);
+           
+            if (isOwner) {
                 channel.setName(`${`[ЗАКРЫТО] ` + channel.name}`)
-                await channel.setLocked(true)
+                // await channel.setLocked(true)
+            } 
+            if (isModerator === channel.id) {
+                channel.setName(`${`[ЗАКРЫТО] ` + channel.name}`)
+                // await channel.setLocked(true)
             }
         }
     }
@@ -59,13 +65,14 @@ client.on('messageCreate', async message => {
         const channel = message.channel;
 
         if (channel.isThread()) {
-            const threadOwnerId = channel.ownerId;
-            const isOwner = message.author.id === threadOwnerId;
-            const isModerator = message.member?.permissions.has('ManageThreads');
-
-            if (!isOwner && !isModerator) {
-                return;
-            } else {
+            const isOwner = message.member?.permissions.has('ManageThreads');
+            const isModerator = map.get(message.author.id);
+           
+            if (isOwner) {
+                channel.setName(`${`[ФУЛЛ] ` + channel.name}`)
+                // await channel.setLocked(true)
+            } 
+            if (isModerator === channel.id) {
                 channel.setName(`${`[ФУЛЛ] ` + channel.name}`)
                 // await channel.setLocked(true)
             }
