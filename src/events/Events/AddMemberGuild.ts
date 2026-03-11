@@ -26,15 +26,15 @@ client.on('guildMemberAdd', async member => {
 
 
         try {
-            embed.setFields({
+            embed.addFields({
                 name: 'Никнейм изменен',
                 value: `С \`${member.displayName}\` на \`/inv ("Ник в игре")\``
             });
-            
+
             await member.setNickname('/inv ("Ник в игре")');
         } catch (err) {
             console.error(err);
-            embed.setFields({
+            embed.addFields({
                 name: 'Произошла ошибка в изменении никнейма',
                 value: `С \`${member.displayName}\` на \`/inv ("Ник в игре")\`\n${err}`
             })
