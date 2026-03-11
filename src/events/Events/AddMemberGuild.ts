@@ -24,10 +24,31 @@ client.on('guildMemberAdd', async member => {
         .setColor(Colors.Green)
         .setTimestamp()
 
+
+        try {
+            const editNickname = await member.setNickname('/inv ("Ник в игре")');
+            
+            embed.setFields({
+                name: 'Никнейм изменен',
+                value: `С \`${member.displayName}\` на \`/inv ("Ник в игре")\``
+            })
+        } catch (err) {
+            console.error(err);
+            embed.setFields({
+                name: 'Произошла ошибка в изменении никнейма',
+                value: `С \`${member.displayName}\` на \`/inv ("Ник в игре")\`\n${err}`
+            })
+        }
+
+
     if (member.avatarURL()) {
         embed.setThumbnail(member.avatarURL())
     }
 
-    if (!channel) return;
-    else await channel.send({ embeds: [ embed ] })
+
+    if (!channel) {
+        return;
+    } else {
+        await channel.send({ embeds: [embed] });
+    };
 })
