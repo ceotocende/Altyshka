@@ -10,7 +10,7 @@ client.on('guildMemberAdd', async member => {
 
     const embed = new EmbedBuilder()
         .setAuthor({ name: 'Новый пользователь пришел на сервер', iconURL: member.guild.iconURL()! })
-        .setThumbnail(member.guild.iconURL())
+        .setThumbnail(member.avatarURL() || member.guild.iconURL())
         .setFields(
             {
                 name: 'Участник',

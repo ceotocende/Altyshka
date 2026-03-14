@@ -16,23 +16,27 @@ client.on('messageCreate', async message => {
 
         if (words.includes('пб') || words.includes('па') || words.includes('п')) {
             try {
-                const thread = await message.startThread({
-                    name: `${await replaceRoleMentionsWithNames(message.guild, message.content)}`,
-                    autoArchiveDuration: 60,
-                });
-                
-                thread.send({
-                    content: `${message.author}`,
-                    embeds: [
-                        new EmbedBuilder()
-                            .setDescription(`**Ветка создана**\nИспользуйте эту ветку для общения с участниками вашего отряда.\nЕсли кто-то покидает отряд, используйте команду ...закрыть и создайте новую ветку.\n\n**Команды:**\n**..фулл** — Помечает этот отряд как сформированный 4/4.\n**..закрыть** — Закрывает и блокирует ветку, она также будет автоматически закрыта через 1 час.\n\n**Команды могут использовать только создатель ветки или модераторы**`)
-                            .setImage('https://media.discordapp.net/attachments/1442111975881441411/1471890036080251066/effce5a01de76a95.png?ex=699093ea&is=698f426a&hm=07cc0e076de2e33613a63d373968c5f7331706bba20da162478d85eb930e5c71&=&format=webp&quality=lossless')
-                            .setTimestamp()
-                            .setColor('Random')
-                    ]
-                })
+                setTimeout(async () => {
+                    const threadName = await replaceRoleMentionsWithNames(message.guild, message.content)
 
-                map.set(message.author.id, thread.id);
+                    const thread = await message.startThread({
+                        name: `${threadName}`,
+                        autoArchiveDuration: 60,
+                    });
+
+                    await thread.send({
+                        content: `${message.author}`,
+                        embeds: [
+                            new EmbedBuilder()
+                                .setDescription(`**Ветка создана**\nИспользуйте эту ветку для общения с участниками вашего отряда.\nЕсли кто-то покидает отряд, используйте команду ...закрыть и создайте новую ветку.\n\n**Команды:**\n**..фулл** — Помечает этот отряд как сформированный 4/4.\n**..закрыть** — Закрывает и блокирует ветку, она также будет автоматически закрыта через 1 час.\n\n**Команды могут использовать только создатель ветки или модераторы**`)
+                                .setImage('https://media.discordapp.net/attachments/1442111975881441411/1471890036080251066/effce5a01de76a95.png?ex=699093ea&is=698f426a&hm=07cc0e076de2e33613a63d373968c5f7331706bba20da162478d85eb930e5c71&=&format=webp&quality=lossless')
+                                .setTimestamp()
+                                .setColor('Random')
+                        ]
+                    })
+
+                    map.set(message.author.id, thread.id);
+                }, 1000)
             } catch (err) {
                 console.log('Ошибка по сообщениям' + err)
             }
@@ -48,12 +52,12 @@ client.on('messageCreate', async message => {
         if (channel.isThread()) {
             const isOwner = message.member?.permissions.has('ManageThreads');
             const isModerator = map.get(message.author.id);
-           
+
             if (isOwner) {
                 channel.setName(`${`[ЗАКРЫТО] ` + channel.name}`)
                 await channel.setLocked(true)
                 map.delete(message.author.id)
-            } 
+            }
             if (isModerator === channel.id) {
                 channel.setName(`${`[ЗАКРЫТО] ` + channel.name}`)
                 await channel.setLocked(true)
@@ -69,11 +73,11 @@ client.on('messageCreate', async message => {
         if (channel.isThread()) {
             const isOwner = message.member?.permissions.has('ManageThreads');
             const isModerator = map.get(message.author.id);
-           
+
             if (isOwner) {
                 channel.setName(`${`[ФУЛЛ] ` + channel.name}`)
                 // await channel.setLocked(true)
-            } 
+            }
             if (isModerator === channel.id) {
                 channel.setName(`${`[ФУЛЛ] ` + channel.name}`)
                 // await channel.setLocked(true)
