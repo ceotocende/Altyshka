@@ -4,7 +4,7 @@ import { TableSync } from "../../database/dbsync";
 
 Client.once('ready', async (client) => {
     console.log('Logged in as: ' + Client.user?.tag);
-    Client.user?.setActivity('за вами',{ type: ActivityType.Watching });
+    Client.user?.setActivity('фармить эндо',{ type: ActivityType.Watching });
     Client.user?.setStatus("idle")
 
     const guild = client.guilds.cache.get(`${process.env.GUILD_ID}`);
